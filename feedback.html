@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Feedback - TechSupport</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-headset"></i>
+
+            <span>TechSupport</span>
+
+        </div>
+
+
+        <ul class="menu">
+
+            <li>
+                <a href="index.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="tickets.html">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>Tickets</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="chat.html">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>Live Chat</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="knowledge.html">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Knowledge Base</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="customers.html">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Customers</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="agents.html">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Agents</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+
+
+            <li class="active">
+                <a href="feedback.html">
+                    <i class="fa-solid fa-star"></i>
+                    <span>Feedback</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="reports.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>Reports</span>
+                </a>
+            </li>
+
+        </ul>
+
+
+        <!-- LOGOUT -->
+
+        <div class="logout">
+
+            <a href="#" onclick="logout(event)">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <div class="main-content">
+
+
+        <!-- ================= FEEDBACK HEADER ================= -->
+
+        <div class="feedback-topbar">
+
+
+            <div class="feedback-topbar-left">
+
+                <div class="feedback-page-heading">
+
+                    <h2>Feedback</h2>
+
+                    <span>Customer Support</span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="feedback-topbar-right">
+
+
+                <!-- SEARCH -->
+
+                <div class="feedback-search">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search...">
+
+                </div>
+
+
+
+                <!-- NOTIFICATION -->
+
+                <div class="feedback-notification">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="feedback-notification-dot"></span>
+
+                </div>
+
+
+
+                <!-- PROFILE -->
+
+                <div class="feedback-profile">
+
+                    <div class="feedback-profile-avatar">
+                        S
+                    </div>
+
+
+                    <div class="feedback-profile-info">
+
+                        <strong>Shreya Sharma</strong>
+
+                        <small>Administrator</small>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-down feedback-profile-arrow"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= PAGE CONTENT ================= -->
+
+        <div class="page-content">
+
+
+            <!-- PAGE TITLE -->
+
+            <div class="feedback-page-title">
+
+
+                <div>
+
+                    <h1>Customer Feedback</h1>
+
+                    <p>
+                        View and manage customer feedback
+                    </p>
+
+                </div>
+
+
+
+                <!-- GIVE FEEDBACK BUTTON -->
+
+                <button
+                    class="add-feedback-btn"
+                    onclick="openFeedbackForm()">
+
+                    <i class="fa-solid fa-star"></i>
+
+                    Give Feedback
+
+                </button>
+
+            </div>
+
+
+
+            <!-- ================= FEEDBACK SUMMARY ================= -->
+
+            <div class="feedback-summary">
+
+
+                <!-- AVERAGE RATING -->
+
+                <div class="feedback-card">
+
+                    <i class="fa-solid fa-star"></i>
+
+                    <div>
+
+                        <h2 id="averageRating">
+                            0.0
+                        </h2>
+
+                        <p>
+                            Average Rating
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TOTAL FEEDBACK -->
+
+                <div class="feedback-card">
+
+                    <i class="fa-solid fa-message"></i>
+
+                    <div>
+
+                        <h2 id="totalFeedback">
+                            0
+                        </h2>
+
+                        <p>
+                            Total Feedback
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- POSITIVE -->
+
+                <div class="feedback-card">
+
+                    <i class="fa-solid fa-face-smile"></i>
+
+                    <div>
+
+                        <h2 id="positiveFeedback">
+                            0
+                        </h2>
+
+                        <p>
+                            Positive Feedback
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- NEGATIVE -->
+
+                <div class="feedback-card">
+
+                    <i class="fa-solid fa-face-frown"></i>
+
+                    <div>
+
+                        <h2 id="negativeFeedback">
+                            0
+                        </h2>
+
+                        <p>
+                            Needs Improvement
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= RECENT FEEDBACK ================= -->
+
+            <div class="content-card">
+
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Recent Feedback
+                        </h2>
+
+                        <p>
+                            Latest customer responses
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    class="feedback-list"
+                    id="feedbackList">
+
+
+                    <!-- DEFAULT EMPTY MESSAGE -->
+
+                    <div class="empty-feedback">
+
+                        <i class="fa-regular fa-comment-dots"></i>
+
+                        <h3>
+                            No feedback yet
+                        </h3>
+
+                        <p>
+                            Customer feedback will appear here.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= FEEDBACK MODAL ================= -->
+
+    <div
+        class="feedback-modal"
+        id="feedbackModal">
+
+
+        <div class="feedback-modal-box">
+
+
+            <!-- MODAL HEADER -->
+
+            <div class="feedback-modal-header">
+
+
+                <div>
+
+                    <h2>
+                        Give Feedback
+                    </h2>
+
+                    <p>
+                        Tell us about your support experience
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    onclick="closeFeedbackForm()">
+
+                    &times;
+
+                </button>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form
+                onsubmit="submitFeedback(event)">
+
+
+                <!-- CUSTOMER NAME -->
+
+                <label>
+                    Customer Name
+                </label>
+
+                <input
+                    type="text"
+                    id="feedbackName"
+                    placeholder="Enter customer name"
+                    required>
+
+
+
+                <!-- RATING -->
+
+                <label>
+                    Rating
+                </label>
+
+                <select
+                    id="feedbackRating"
+                    required>
+
+                    <option value="">
+                        Select Rating
+                    </option>
+
+                    <option value="5">
+                        ★★★★★ - Excellent
+                    </option>
+
+                    <option value="4">
+                        ★★★★☆ - Good
+                    </option>
+
+                    <option value="3">
+                        ★★★☆☆ - Average
+                    </option>
+
+                    <option value="2">
+                        ★★☆☆☆ - Poor
+                    </option>
+
+                    <option value="1">
+                        ★☆☆☆☆ - Very Poor
+                    </option>
+
+                </select>
+
+
+
+                <!-- MESSAGE -->
+
+                <label>
+                    Your Feedback
+                </label>
+
+                <textarea
+                    id="feedbackMessage"
+                    placeholder="Write your feedback..."
+                    required></textarea>
+
+
+
+                <!-- BUTTONS -->
+
+                <div class="feedback-modal-buttons">
+
+
+                    <button
+                        type="button"
+                        onclick="closeFeedbackForm()">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit">
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                        Submit Feedback
+
+                    </button>
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

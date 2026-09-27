@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reports - TechSupport</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="logo">
+        <i class="fa-solid fa-headset"></i>
+        <span>TechSupport</span>
+    </div>
+
+    <ul class="menu">
+
+        <li>
+            <a href="index.html">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="tickets.html">
+                <i class="fa-solid fa-ticket"></i>
+                <span>Tickets</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="chat.html">
+                <i class="fa-solid fa-comments"></i>
+                <span>Live Chat</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="knowledge.html">
+                <i class="fa-solid fa-book"></i>
+                <span>Knowledge Base</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="customers.html">
+                <i class="fa-solid fa-users"></i>
+                <span>Customers</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="agents.html">
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Agents</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="analytics.html">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Analytics</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="feedback.html">
+                <i class="fa-solid fa-star"></i>
+                <span>Feedback</span>
+            </a>
+        </li>
+
+        <li class="active">
+            <a href="reports.html">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Reports</span>
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="logout">
+        <a href="#" onclick="logout(event)">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+
+</div>
+
+
+<div class="main-content">
+
+    <!-- TOPBAR -->
+    <div class="reports-topbar">
+
+        <div class="reports-heading">
+            <h2>Reports</h2>
+            <span>Customer Support</span>
+        </div>
+
+        <div class="reports-topbar-right">
+
+            <div class="reports-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+
+            <div class="reports-notification">
+                <i class="fa-regular fa-bell"></i>
+                <span></span>
+            </div>
+
+            <div class="reports-profile">
+
+                <div class="reports-avatar">S</div>
+
+                <div>
+                    <strong>Shreya Sharma</strong>
+                    <small>Administrator</small>
+                </div>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PAGE CONTENT -->
+    <div class="page-content">
+
+        <div class="reports-page-title">
+
+            <div>
+                <h1>Support Reports</h1>
+                <p>View and generate customer support reports</p>
+            </div>
+
+            <div class="reports-buttons">
+
+                <button onclick="updateReports()" class="reports-generate-btn">
+                    <i class="fa-solid fa-rotate"></i>
+                    Generate Report
+                </button>
+
+                <button type="button" onclick="printReport()" class="reports-print-btn">
+                    Print Report
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY CARDS -->
+        <div class="reports-summary">
+
+            <div class="reports-card">
+                <div class="reports-card-icon red">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+
+                <div>
+                    <h2 id="reportTotalTickets">0</h2>
+                    <p>Total Tickets</p>
+                </div>
+            </div>
+
+
+            <div class="reports-card">
+                <div class="reports-card-icon green">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div>
+                    <h2 id="reportResolvedTickets">0</h2>
+                    <p>Resolved / Closed</p>
+                </div>
+            </div>
+
+
+            <div class="reports-card">
+                <div class="reports-card-icon orange">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div>
+                    <h2 id="reportOpenTickets">0</h2>
+                    <p>Open Tickets</p>
+                </div>
+            </div>
+
+
+            <div class="reports-card">
+                <div class="reports-card-icon blue">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+                    <h2 id="reportCustomers">0</h2>
+                    <p>Total Customers</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- STATUS REPORT -->
+        <div class="reports-grid">
+
+            <div class="reports-section">
+
+                <div class="reports-section-title">
+                    <div>
+                        <h2>Ticket Status Report</h2>
+                        <p>Current status of all support tickets</p>
+                    </div>
+                </div>
+
+                <div class="reports-table-wrapper">
+
+                    <table class="reports-table">
+
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Total Tickets</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="reportStatusRows"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- CATEGORY -->
+            <div class="reports-section">
+
+                <div class="reports-section-title">
+                    <div>
+                        <h2>Category-wise Report</h2>
+                        <p>Tickets according to category</p>
+                    </div>
+                </div>
+
+                <div class="reports-table-wrapper">
+
+                    <table class="reports-table">
+
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Tickets</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="reportCategoryRows"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRIORITY + AGENTS -->
+        <div class="reports-grid">
+
+            <div class="reports-section">
+
+                <div class="reports-section-title">
+                    <div>
+                        <h2>Priority-wise Report</h2>
+                        <p>Tickets according to priority</p>
+                    </div>
+                </div>
+
+                <div class="reports-table-wrapper">
+
+                    <table class="reports-table">
+
+                        <thead>
+                            <tr>
+                                <th>Priority</th>
+                                <th>Tickets</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="reportPriorityRows"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <div class="reports-section">
+
+                <div class="reports-section-title">
+                    <div>
+                        <h2>Agent Performance</h2>
+                        <p>Tickets handled by support agents</p>
+                    </div>
+                </div>
+
+                <div class="reports-table-wrapper">
+
+                    <table class="reports-table">
+
+                        <thead>
+                            <tr>
+                                <th>Agent</th>
+                                <th>Tickets</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="reportAgentRows"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

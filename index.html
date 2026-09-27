@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TechSupport - Helpdesk System</title>
+
+    <!-- CSS File -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-headset"></i>
+            <span>TechSupport</span>
+        </div>
+
+        <p class="menu-title">MAIN MENU</p>
+
+        <ul class="sidebar-menu">
+
+            <li class="active">
+                <a href="index.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="tickets.html">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>Tickets</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="chat.html">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>Live Chat</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="knowledge.html">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Knowledge Base</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="customers.html">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Customers</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="agents.html">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span>Agents</span>
+                </a>
+            </li>
+
+            <p class="menu-title">ANALYTICS</p>
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="feedback.html">
+                    <i class="fa-solid fa-star"></i>
+                    <span>Feedback</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>Reports</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="sidebar-bottom">
+
+            <a href="#" onclick="logout(event)">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Top Navbar -->
+        <header class="topbar">
+
+            <div class="page-title">
+                <h1>Dashboard</h1>
+                <p>Welcome back! Here's your support overview.</p>
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+
+                <button class="notification">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>3</span>
+                </button>
+
+                <div class="profile">
+
+                    <div class="profile-image">
+                        S
+                    </div>
+
+                    <div class="profile-info">
+                        <strong>Shreya Sharma</strong>
+                        <small>Admin</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- Dashboard Content -->
+        <section class="dashboard">
+
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+
+                <div>
+                    <h2 id="dashboardGreeting">Good Morning!</h2>
+
+                    <p>
+                        Manage your support tickets and keep your customers happy.
+                    </p>
+
+                    <button class="primary-btn" onclick="createTicket()">
+                        <i class="fa-solid fa-plus"></i>
+                        Create New Ticket
+                    </button>
+                </div>
+
+                <div class="banner-icon">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+
+            </div>
+
+
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+                        <i class="fa-solid fa-ticket"></i>
+                    </div>
+
+                    <div>
+                        <p>Total Tickets</p>
+                        <h3 id="dashboardTotalTickets">0</h3>
+                        <span class="positive">
+                            <i class="fa-solid fa-arrow-up"></i>
+                            12% this month
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
+                    <div>
+                        <p>Open Tickets</p>
+                        <h3 id="dashboardOpenTickets">0</h3>
+                        <span class="positive">
+                            <i class="fa-solid fa-arrow-down"></i>
+                            8% this week
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <div>
+                        <p>Resolved</p>
+                        <h3 id="dashboardResolvedTickets">0</h3>
+                        <span class="positive">
+                            <i class="fa-solid fa-arrow-up"></i>
+                            18% this month
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <div>
+                        <p>Customers</p>
+                        <h3 id="dashboardCustomerCount">0</h3>
+                        <span class="positive">
+                            <i class="fa-solid fa-arrow-up"></i>
+                            6% this month
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Middle Section -->
+            <div class="dashboard-grid">
+
+                <!-- Recent Tickets -->
+                <div class="dashboard-card tickets-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h3>Recent Tickets</h3>
+                            <p>Latest customer support requests</p>
+                        </div>
+
+                        <a href="tickets.html">View All</a>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>Ticket ID</th>
+                                    <th>Customer</th>
+                                    <th>Issue</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="recentTicketsBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Ticket Summary -->
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h3>Ticket Summary</h3>
+                            <p>Current ticket status</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary">
+
+                        <div class="summary-item">
+                            <span>
+                                <i class="fa-solid fa-circle"></i>
+                                New
+                            </span>
+                            <strong id="summaryNewTickets">0</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress new-progress"></div>
+                        </div>
+
+
+                        <div class="summary-item">
+                            <span>
+                                <i class="fa-solid fa-circle"></i>
+                                In Progress
+                            </span>
+                            <strong id="summaryProgressTickets">0</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress progress-work"></div>
+                        </div>
+
+
+                        <div class="summary-item">
+                            <span>
+                                <i class="fa-solid fa-circle"></i>
+                                Waiting
+                            </span>
+                            <strong id="summaryWaitingTickets">0</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress progress-wait"></div>
+                        </div>
+
+
+                        <div class="summary-item">
+                            <span>
+                                <i class="fa-solid fa-circle"></i>
+                                Resolved
+                            </span>
+                            <strong id="summaryResolvedTickets">0</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress progress-resolved"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Bottom Section -->
+            <div class="bottom-grid">
+
+                <!-- Quick Actions -->
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+                        <div>
+                            <h3>Quick Actions</h3>
+                            <p>Frequently used options</p>
+                        </div>
+                    </div>
+
+
+                    <div class="quick-actions">
+
+                        <button onclick="createTicket()">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Create Ticket</span>
+                        </button>
+
+                        <button onclick="openChat()">
+                            <i class="fa-solid fa-comments"></i>
+                            <span>Start Chat</span>
+                        </button>
+
+                        <button onclick="openCustomers()">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Add Customer</span>
+                        </button>
+
+                        <button onclick="openReports()">
+                            <i class="fa-solid fa-file-export"></i>
+                            <span>Generate Report</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Support Performance -->
+                <div class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h3>Support Performance</h3>
+                            <p>This month's performance</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance">
+
+                        <div class="performance-item">
+                            <span>Resolution Rate</span>
+                            <strong>87%</strong>
+                        </div>
+
+                        <div class="performance-item">
+                            <span>Customer Satisfaction</span>
+                            <strong>94%</strong>
+                        </div>
+
+                        <div class="performance-item">
+                            <span>Average Response Time</span>
+                            <strong>2h 15m</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - TechSupport</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+    <main class="auth-layout">
+        <section class="auth-intro">
+            <a class="auth-brand" href="login.html"><i class="fa-solid fa-headset"></i> TechSupport</a>
+            <div class="auth-intro-copy">
+                <span class="auth-kicker">SUPPORT, IN SYNC</span>
+                <h1>Good support starts with a conversation.</h1>
+                <p>Sign in to manage requests, support customers, or get help from your own chat.</p>
+                <div class="auth-stat-row">
+                    <span><i class="fa-solid fa-circle-check"></i> Tickets stay saved</span>
+                    <span><i class="fa-solid fa-comments"></i> Chats stay personal</span>
+                </div>
+            </div>
+            <div class="auth-side-note">TechSupport Helpdesk <span>Local demo workspace</span></div>
+        </section>
+
+        <section class="auth-panel" aria-label="Account access">
+            <div class="auth-form-wrap">
+                <div class="auth-heading">
+                    <span class="auth-kicker">YOUR WORKSPACE</span>
+                    <h2 id="authTitle">Welcome back</h2>
+                    <p id="authSubtitle">Sign in with your user ID or email.</p>
+                </div>
+
+                <div class="auth-tabs" role="tablist" aria-label="Account action">
+                    <button type="button" class="auth-tab is-active" data-auth-mode="login" role="tab" aria-selected="true">Login</button>
+                    <button type="button" class="auth-tab" data-auth-mode="register" role="tab" aria-selected="false">Register</button>
+                </div>
+
+                <form id="loginForm" class="auth-form">
+                    <label for="loginIdentity">User ID or email</label>
+                    <input id="loginIdentity" name="identity" autocomplete="username" placeholder="e.g. TS-AD-1042 or you@example.com" required>
+                    <label for="loginPassword">Password</label>
+                    <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+                    <button class="auth-submit" type="submit">Sign in <i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+
+                <form id="registerForm" class="auth-form" hidden>
+                    <label for="registerName">Full name</label>
+                    <input id="registerName" name="name" autocomplete="name" placeholder="Your name" required>
+                    <label for="registerEmail">Email</label>
+                    <input id="registerEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+                    <label for="registerRole">Account role</label>
+                    <select id="registerRole" name="role" required>
+                        <option value="customer">Customer</option>
+                        <option value="agent">Agent</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <label for="registerPassword">Password <span class="auth-hint">At least 6 characters</span></label>
+                    <input id="registerPassword" name="password" type="password" autocomplete="new-password" minlength="6" placeholder="Create a password" required>
+                    <button class="auth-submit" type="submit">Create account <i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+
+                <p id="authFeedback" class="auth-feedback" role="status" aria-live="polite"></p>
+
+                <details class="demo-access">
+                    <summary>Demo accounts</summary>
+                    <div class="demo-account-list">
+                        <p><strong>Admin</strong><span>ID: TS-ADMIN · Password: admin123</span></p>
+                        <p><strong>Agent</strong><span>ID: TS-AGENT · Password: agent123</span></p>
+                        <p><strong>Customer</strong><span>ID: TS-CUSTOMER · Password: customer123</span></p>
+                    </div>
+                </details>
+                <p class="auth-disclaimer">Demo authentication only. Accounts and sessions are stored in this browser.</p>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

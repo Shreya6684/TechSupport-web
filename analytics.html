@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analytics - TechSupport</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fas fa-headset"></i>
+            <span>TechSupport</span>
+        </div>
+
+        <p class="menu-title">MAIN MENU</p>
+
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
+            <li><a href="tickets.html"><i class="fas fa-ticket"></i><span>Tickets</span></a></li>
+            <li><a href="chat.html"><i class="fas fa-comments"></i><span>Live Chat</span></a></li>
+            <li><a href="knowledge.html"><i class="fas fa-book"></i><span>Knowledge Base</span></a></li>
+            <li><a href="customers.html"><i class="fas fa-users"></i><span>Customers</span></a></li>
+            <li><a href="agents.html"><i class="fas fa-user-tie"></i><span>Agents</span></a></li>
+        </ul>
+
+        <p class="menu-title">ANALYTICS</p>
+
+        <ul class="sidebar-menu">
+            <li class="active"><a href="analytics.html"><i class="fas fa-chart-pie"></i><span>Analytics</span></a></li>
+            <li><a href="feedback.html"><i class="fas fa-star"></i><span>Feedback</span></a></li>
+            <li><a href="reports.html"><i class="fas fa-file-alt"></i><span>Reports</span></a></li>
+        </ul>
+
+        <div class="sidebar-bottom">
+            <a href="#" onclick="logout(event)">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <!-- Top Bar -->
+
+        <header class="topbar">
+
+            <div class="page-title">
+                <h1>Analytics</h1>
+                <p>Monitor your support system performance</p>
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+
+                <button class="notification" type="button" aria-label="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span>3</span>
+                </button>
+
+                <div class="profile">
+                    <div class="profile-image">
+                        S
+                    </div>
+
+                    <div class="profile-info">
+                        <strong>Shreya Sharma</strong>
+                        <small>Admin</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- Analytics Cards -->
+
+        <section class="analytics-cards">
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon red">
+                    <i class="fas fa-ticket"></i>
+                </div>
+
+                <div>
+                    <p>Total Tickets</p>
+                    <h2 id="analyticsTotalTickets">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon orange">
+                    <i class="fas fa-clock"></i>
+                </div>
+
+                <div>
+                    <p>Open Tickets</p>
+                    <h2 id="analyticsOpenTickets">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon green">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <div>
+                    <p>Resolved Tickets</p>
+                    <h2 id="analyticsResolvedTickets">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <div class="analytics-icon blue">
+                    <i class="fas fa-users"></i>
+                </div>
+
+                <div>
+                    <p>Total Customers</p>
+                    <h2 id="analyticsCustomers">0</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Ticket Status -->
+
+        <section class="analytics-section">
+
+            <div class="section-header">
+                <div>
+                    <h2>Ticket Status</h2>
+                    <p>Current ticket distribution</p>
+                </div>
+            </div>
+
+            <div class="status-chart">
+
+                <div class="status-row">
+
+                    <div class="status-name">
+                        <span class="status-dot new"></span>
+                        New
+                    </div>
+
+                    <div class="status-bar">
+                        <div id="newBar"></div>
+                    </div>
+
+                    <strong id="newCount">0</strong>
+
+                </div>
+
+
+                <div class="status-row">
+
+                    <div class="status-name">
+                        <span class="status-dot progress"></span>
+                        In Progress
+                    </div>
+
+                    <div class="status-bar">
+                        <div id="progressBar"></div>
+                    </div>
+
+                    <strong id="progressCount">0</strong>
+
+                </div>
+
+
+                <div class="status-row">
+
+                    <div class="status-name">
+                        <span class="status-dot resolved"></span>
+                        Resolved
+                    </div>
+
+                    <div class="status-bar">
+                        <div id="resolvedBar"></div>
+                    </div>
+
+                    <strong id="resolvedCount">0</strong>
+
+                </div>
+
+
+                <div class="status-row">
+
+                    <div class="status-name">
+                        <span class="status-dot closed"></span>
+                        Closed
+                    </div>
+
+                    <div class="status-bar">
+                        <div id="closedBar"></div>
+                    </div>
+
+                    <strong id="closedCount">0</strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Category and Priority -->
+
+        <div class="analytics-grid">
+
+            <section class="analytics-section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Tickets by Category</h2>
+                        <p>Support requests by category</p>
+                    </div>
+                </div>
+
+                <div id="categoryStats" class="category-stats"></div>
+
+            </section>
+
+
+            <section class="analytics-section">
+
+                <div class="section-header">
+                    <div>
+                        <h2>Tickets by Priority</h2>
+                        <p>Ticket priority distribution</p>
+                    </div>
+                </div>
+
+                <div id="priorityStats" class="priority-stats"></div>
+
+            </section>
+
+        </div>
+
+
+        <!-- Agent Performance -->
+
+        <section class="analytics-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Agent Performance</h2>
+                    <p>Tickets handled by support agents</p>
+                </div>
+
+            </div>
+
+            <div id="agentPerformanceList" class="agent-performance"></div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

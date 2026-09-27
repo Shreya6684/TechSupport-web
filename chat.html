@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Live Chat - TechSupport</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-headset"></i>
+            <span>TechSupport</span>
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="index.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="tickets.html">
+                    <i class="fa-solid fa-ticket"></i>
+                    Tickets
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="chat.html">
+                    <i class="fa-solid fa-comments"></i>
+                    Live Chat
+                </a>
+            </li>
+
+            <li>
+                <a href="knowledge.html">
+                    <i class="fa-solid fa-book"></i>
+                    Knowledge Base
+                </a>
+            </li>
+
+            <li>
+                <a href="customers.html">
+                    <i class="fa-solid fa-users"></i>
+                    Customers
+                </a>
+            </li>
+
+            <li>
+                <a href="agents.html">
+                    <i class="fa-solid fa-user-tie"></i>
+                    Agents
+                </a>
+            </li>
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Analytics
+                </a>
+            </li>
+
+            <li>
+                <a href="feedback.html">
+                    <i class="fa-solid fa-star"></i>
+                    Feedback
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="sidebar-bottom">
+            <a href="#" onclick="logout(event)">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <div class="topbar">
+
+            <div>
+                <h2>Live Chat</h2>
+                <p>Communicate with customers in real time</p>
+            </div>
+
+            <div class="topbar-actions">
+                <div class="chat-agent">
+                    <i class="fa-solid fa-circle"></i>
+                    Support Team Online
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Chat Area -->
+        <div class="chat-container">
+
+            <!-- Customer List -->
+            <div class="chat-users">
+
+                <div class="chat-users-header">
+                    <h3>Conversations</h3>
+                </div>
+
+                <div id="chatUsersList"></div>
+
+            </div>
+
+
+            <!-- Chat Window -->
+            <div class="chat-window">
+
+                <div class="chat-header">
+
+                    <div class="chat-person">
+
+                        <div class="user-avatar" id="chatHeaderAvatar">
+                            R
+                        </div>
+
+                        <div>
+                            <strong id="chatHeaderName">Select a customer</strong>
+                            <p>
+                                <span class="online-dot" id="chatStatusDot"></span>
+                                <span id="chatHeaderStatus">Online</span>
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Messages -->
+                <div class="messages" id="messages"></div>
+
+
+                <!-- Message Input -->
+                <div class="chat-input-area">
+
+                    <input
+                        type="text"
+                        id="messageInput"
+                        placeholder="Type a message..."
+                        disabled
+                    >
+
+                    <button type="button" onclick="sendMessage()" aria-label="Send message" disabled>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

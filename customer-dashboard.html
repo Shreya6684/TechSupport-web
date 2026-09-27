@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - TechSupport</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="customer-portal-page">
+    <aside class="sidebar">
+        <a class="logo customer-portal-logo" href="customer-dashboard.html"><i class="fa-solid fa-headset"></i><span>TechSupport</span></a>
+        <p class="menu-title">MY SUPPORT</p>
+        <ul class="sidebar-menu customer-portal-menu">
+            <li class="active"><a href="customer-dashboard.html"><i class="fa-solid fa-house"></i><span>My Dashboard</span></a></li>
+            <li><a href="#raise-ticket"><i class="fa-solid fa-plus"></i><span>Raise a Ticket</span></a></li>
+            <li><a href="#my-tickets"><i class="fa-solid fa-ticket"></i><span>My Tickets</span></a></li>
+            <li><a href="chat.html"><i class="fa-solid fa-comments"></i><span>Live Chat</span></a></li>
+            <li><a href="knowledge.html"><i class="fa-solid fa-book"></i><span>Knowledge Base</span></a></li>
+            <li><a href="#feedback"><i class="fa-solid fa-star"></i><span>Feedback</span></a></li>
+            <li><a href="#my-profile"><i class="fa-solid fa-user"></i><span>My Profile</span></a></li>
+        </ul>
+        <div class="sidebar-bottom"><a href="#" onclick="logout(event)"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a></div>
+    </aside>
+
+    <main class="main-content customer-portal-main">
+        <header class="topbar customer-portal-topbar">
+            <div>
+                <h1>My Dashboard</h1>
+                <p>Your support requests, conversations and account</p>
+            </div>
+            <div class="profile customer-portal-profile">
+                <div class="profile-image" id="portalAvatar">C</div>
+                <div class="profile-info"><strong id="portalName">Customer</strong><small>Customer</small></div>
+            </div>
+        </header>
+
+        <div class="customer-portal-content" id="customerPortal">
+            <section class="portal-welcome">
+                <div><span class="auth-kicker">CUSTOMER SPACE</span><h2 id="portalWelcome">Welcome back</h2><p>Your support, all in one place.</p></div>
+                <a class="portal-chat-link" href="chat.html"><i class="fa-solid fa-comments"></i> Open Live Chat</a>
+            </section>
+
+            <section class="portal-stats" aria-label="My ticket summary">
+                <article class="portal-stat"><span>My tickets</span><strong id="myTicketCount">0</strong><i class="fa-solid fa-ticket"></i></article>
+                <article class="portal-stat"><span>In progress</span><strong id="myOpenTicketCount">0</strong><i class="fa-solid fa-clock"></i></article>
+                <article class="portal-stat"><span>Resolved</span><strong id="myResolvedTicketCount">0</strong><i class="fa-solid fa-circle-check"></i></article>
+            </section>
+
+            <section class="portal-section portal-raise-ticket" id="raise-ticket">
+                <div class="portal-section-heading"><div><h2>Raise a Ticket</h2><p>Tell us what you need help with</p></div></div>
+                <form id="customerTicketForm" class="portal-feedback-form portal-ticket-form">
+                    <label for="customerTicketCategory">Category</label>
+                    <select id="customerTicketCategory" name="category" required><option>Network</option><option>Software</option><option>Hardware</option><option>Account</option><option>Other</option></select>
+                    <label for="customerTicketPriority">Priority</label>
+                    <select id="customerTicketPriority" name="priority" required><option>Low</option><option selected>Medium</option><option>High</option></select>
+                    <label for="customerTicketSubject">Subject</label>
+                    <input id="customerTicketSubject" name="subject" maxlength="120" placeholder="Briefly describe the issue" required>
+                    <label for="customerTicketDescription">Description</label>
+                    <textarea id="customerTicketDescription" name="description" rows="4" maxlength="2000" placeholder="Add details that will help us resolve your issue" required></textarea>
+                    <button type="submit" class="portal-submit">Submit ticket <i class="fa-solid fa-arrow-right"></i></button>
+                    <p id="customerTicketStatus" class="portal-feedback-status" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+
+            <section class="portal-section" id="my-tickets">
+                <div class="portal-section-heading"><div><h2>My Tickets</h2><p>Only requests linked to your account</p></div></div>
+                <div class="portal-table-wrap">
+                    <table class="portal-table">
+                        <thead><tr><th>Ticket</th><th>Subject</th><th>Category</th><th>Priority</th><th>Status</th></tr></thead>
+                        <tbody id="myTicketRows"></tbody>
+                    </table>
+                </div>
+                <p class="portal-empty" id="noCustomerTickets" hidden>No tickets linked to your account yet.</p>
+            </section>
+
+            <div class="portal-lower-grid">
+                <section class="portal-section" id="feedback">
+                    <div class="portal-section-heading"><div><h2>Share feedback</h2><p>Send a note about your support experience</p></div></div>
+                    <form id="customerFeedbackForm" class="portal-feedback-form">
+                        <label for="feedbackTicket">Related ticket</label>
+                        <select id="feedbackTicket" name="ticketId"><option value="">General feedback</option></select>
+                        <label for="feedbackRating">Rating</label>
+                        <select id="feedbackRating" name="rating" required><option value="5">5 - Excellent</option><option value="4">4 - Good</option><option value="3">3 - Okay</option><option value="2">2 - Poor</option><option value="1">1 - Very poor</option></select>
+                        <label for="feedbackMessage">Your feedback</label>
+                        <textarea id="feedbackMessage" name="message" rows="4" maxlength="1000" placeholder="Tell us about your experience" required></textarea>
+                        <button type="submit" class="portal-submit">Send feedback <i class="fa-solid fa-arrow-right"></i></button>
+                        <p id="customerFeedbackStatus" class="portal-feedback-status" role="status" aria-live="polite"></p>
+                    </form>
+                    <div class="portal-feedback-history"><h3>My recent feedback</h3><div id="myFeedbackList"></div></div>
+                </section>
+
+                <section class="portal-section" id="my-profile">
+                    <div class="portal-section-heading"><div><h2>My Profile</h2><p>Your account details</p></div></div>
+                    <dl class="portal-profile-details">
+                        <div><dt>Full name</dt><dd id="profileCustomerName"></dd></div>
+                        <div><dt>Email</dt><dd id="profileCustomerEmail"></dd></div>
+                        <div><dt>Phone</dt><dd id="profileCustomerPhone"></dd></div>
+                        <div><dt>User ID</dt><dd id="profileCustomerId"></dd></div>
+                        <div><dt>Account type</dt><dd>Customer</dd></div>
+                    </dl>
+                    <a class="portal-knowledge-link" href="knowledge.html"><i class="fa-solid fa-book-open"></i><span><strong>Knowledge Base</strong><small>Browse self-service guides</small></span><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </section>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

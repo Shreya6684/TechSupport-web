@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Knowledge Base - TechSupport</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-headset"></i>
+            <span>TechSupport</span>
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="index.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="tickets.html">
+                    <i class="fa-solid fa-ticket"></i>
+                    Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="chat.html">
+                    <i class="fa-solid fa-comments"></i>
+                    Live Chat
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="knowledge.html">
+                    <i class="fa-solid fa-book"></i>
+                    Knowledge Base
+                </a>
+            </li>
+
+            <li>
+                <a href="customers.html">
+                    <i class="fa-solid fa-users"></i>
+                    Customers
+                </a>
+            </li>
+
+            <li>
+                <a href="agents.html">
+                    <i class="fa-solid fa-user-tie"></i>
+                    Agents
+                </a>
+            </li>
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Analytics
+                </a>
+            </li>
+
+            <li>
+                <a href="feedback.html">
+                    <i class="fa-solid fa-star"></i>
+                    Feedback
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="sidebar-bottom">
+            <a href="#" onclick="logout(event)">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- Main Content -->
+
+    <div class="main-content">
+
+        <div class="topbar">
+
+            <div>
+                <h2>Knowledge Base</h2>
+                <p>Find solutions to common technical problems</p>
+            </div>
+
+        </div>
+
+
+        <!-- Search -->
+
+        <div class="knowledge-search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="knowledgeSearch"
+                placeholder="Search for a problem or solution..."
+            >
+
+        </div>
+
+
+        <!-- Categories -->
+
+        <div class="knowledge-categories">
+
+            <div class="knowledge-card"
+                 onclick="showArticle('network')">
+
+                <div class="knowledge-icon">
+                    <i class="fa-solid fa-wifi"></i>
+                </div>
+
+                <h3>Network & WiFi</h3>
+
+                <p>
+                    Troubleshoot internet and connectivity problems.
+                </p>
+
+            </div>
+
+
+            <div class="knowledge-card"
+                 onclick="showArticle('software')">
+
+                <div class="knowledge-icon">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+
+                <h3>Software Issues</h3>
+
+                <p>
+                    Fix application errors and software problems.
+                </p>
+
+            </div>
+
+
+            <div class="knowledge-card"
+                 onclick="showArticle('hardware')">
+
+                <div class="knowledge-icon">
+                    <i class="fa-solid fa-computer"></i>
+                </div>
+
+                <h3>Hardware</h3>
+
+                <p>
+                    Get help with computers and hardware devices.
+                </p>
+
+            </div>
+
+
+            <div class="knowledge-card"
+                 onclick="showArticle('email')">
+
+                <div class="knowledge-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <h3>Email Support</h3>
+
+                <p>
+                    Solve email login and sending problems.
+                </p>
+
+            </div>
+
+
+            <div class="knowledge-card"
+                 onclick="showArticle('security')">
+
+                <div class="knowledge-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <h3>Security</h3>
+
+                <p>
+                    Password, account and security solutions.
+                </p>
+
+            </div>
+
+
+            <div class="knowledge-card"
+                 onclick="showArticle('mobile')">
+
+                <div class="knowledge-icon">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                </div>
+
+                <h3>Mobile Support</h3>
+
+                <p>
+                    Troubleshoot common mobile device problems.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Articles -->
+
+        <div class="dashboard-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>Popular Solutions</h3>
+                    <p>Frequently viewed support articles</p>
+                </div>
+
+            </div>
+
+
+            <div class="article-list">
+
+                <div class="article-item"
+                     onclick="showArticle('wifi')">
+
+                    <i class="fa-solid fa-circle-question"></i>
+
+                    <div>
+                        <h4>WiFi is not connecting</h4>
+                        <p>
+                            Steps to troubleshoot common WiFi connection problems.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="article-item"
+                     onclick="showArticle('password')">
+
+                    <i class="fa-solid fa-key"></i>
+
+                    <div>
+                        <h4>How to reset your password?</h4>
+                        <p>
+                            Follow these steps to reset your account password.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="article-item"
+                     onclick="showArticle('software')">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    <div>
+                        <h4>Application showing an error</h4>
+                        <p>
+                            Basic steps for resolving software errors.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="article-item"
+                     onclick="showArticle('email')">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <div>
+                        <h4>Email is not working</h4>
+                        <p>
+                            Check login, internet connection and email settings.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Article Display -->
+
+        <div class="dashboard-card" id="articleBox">
+
+            <h3>How can we help you?</h3>
+
+            <p>
+                Select a category or popular solution above
+                to view troubleshooting steps.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

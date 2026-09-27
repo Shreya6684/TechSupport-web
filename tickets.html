@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tickets - TechSupport</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-headset"></i>
+            <span>TechSupport</span>
+        </div>
+
+        <ul class="menu">
+
+            <li>
+                <a href="index.html">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="tickets.html">
+                    <i class="fa-solid fa-ticket"></i>
+                    Tickets
+                </a>
+            </li>
+
+            <li>
+                <a href="chat.html">
+                    <i class="fa-solid fa-comments"></i>
+                    Live Chat
+                </a>
+            </li>
+
+            <li>
+                <a href="knowledge.html">
+                    <i class="fa-solid fa-book"></i>
+                    Knowledge Base
+                </a>
+            </li>
+
+            <li>
+                <a href="customers.html">
+                    <i class="fa-solid fa-users"></i>
+                    Customers
+                </a>
+            </li>
+
+            <li>
+                <a href="agents.html">
+                    <i class="fa-solid fa-user-tie"></i>
+                    Agents
+                </a>
+            </li>
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Analytics
+                </a>
+            </li>
+
+            <li>
+                <a href="feedback.html">
+                    <i class="fa-solid fa-star"></i>
+                    Feedback
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="sidebar-bottom">
+            <a href="#" onclick="logout(event)">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Top Bar -->
+        <div class="topbar">
+
+            <div>
+                <h2>Tickets</h2>
+                <p>Manage and track customer support tickets</p>
+            </div>
+
+            <div class="topbar-actions">
+                <button class="create-ticket-btn" onclick="createTicket()">
+                    <i class="fa-solid fa-plus"></i>
+                    Create Ticket
+                </button>
+            </div>
+
+        </div>
+
+
+        <!-- Ticket Stats -->
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+
+                <div>
+                    <h3 id="totalTickets">0</h3>
+                    <p>Total Tickets</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+
+                <div>
+                    <h3 id="newTickets">0</h3>
+                    <p>New Tickets</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-spinner"></i>
+                </div>
+
+                <div>
+                    <h3 id="progressTickets">0</h3>
+                    <p>In Progress</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+                <div>
+                    <h3 id="resolvedTickets">0</h3>
+                    <p>Resolved</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Ticket Table -->
+        <div class="dashboard-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>All Tickets</h3>
+                    <p>View and manage customer support requests</p>
+                </div>
+
+                <select id="statusFilter">
+                    <option value="all">All Tickets</option>
+                    <option value="New">New</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Waiting">Waiting</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Closed">Closed</option>
+                </select>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Customer</th>
+                            <th>Subject</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="ticketTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
