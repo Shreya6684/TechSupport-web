@@ -111,10 +111,11 @@
             </div>
 
             <div class="topbar-actions">
-                <button class="create-ticket-btn" onclick="createTicket()">
-                    <i class="fa-solid fa-plus"></i>
-                    Create Ticket
-                </button>
+                <div class="ticket-backup-tools" id="ticketBackupTools" hidden>
+                    <button type="button" class="ticket-backup-btn" onclick="exportSupportData()"><i class="fa-solid fa-download"></i> Export backup</button>
+                    <label class="ticket-backup-btn" for="ticketBackupFile"><i class="fa-solid fa-upload"></i> Import backup</label>
+                    <input id="ticketBackupFile" type="file" accept="application/json,.json" hidden>
+                </div>
             </div>
 
         </div>

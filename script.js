@@ -48,14 +48,14 @@ function loadAuthUsers() {
     if (stored) return parseJson(stored, []);
     const starterUsers = [
         { id: "TS-ADMIN", name: "Shreya Sharma", email: "admin@techsupport.com", password: "admin123", role: "admin" },
-        { id: "TS-AGENT", name: "Rahul Verma", email: "rahul@techsupport.com", password: "agent123", role: "agent" },
-        { id: "TS-AG-NEHA", name: "Neha Singh", email: "neha@techsupport.com", password: "agent123", role: "agent" },
-        { id: "TS-AG-AMIT", name: "Amit Kumar", email: "amit@techsupport.com", password: "agent123", role: "agent" },
-        { id: "TS-AG-PRIYA", name: "Priya Sharma", email: "priya@techsupport.com", password: "agent123", role: "agent" },
-        { id: "TS-CUSTOMER", name: "Rahul Kumar", email: "rahul@gmail.com", password: "customer123", role: "customer" },
-        { id: "TS-CU-ANANYA", name: "Ananya Singh", email: "ananya@gmail.com", password: "customer123", role: "customer" },
-        { id: "TS-CU-PRIYA", name: "Priya Das", email: "priya@gmail.com", password: "customer123", role: "customer" },
-        { id: "TS-CU-ARJUN", name: "Arjun Mehta", email: "arjun@gmail.com", password: "customer123", role: "customer" }
+        { id: "TS-AGENT", name: "Rahul Verma", email: "rahul@techsupport.com", password: "", role: "agent" },
+        { id: "TS-AG-NEHA", name: "Neha Singh", email: "neha@techsupport.com", password: "", role: "agent" },
+        { id: "TS-AG-AMIT", name: "Amit Kumar", email: "amit@techsupport.com", password: "", role: "agent" },
+        { id: "TS-AG-PRIYA", name: "Priya Sharma", email: "priya@techsupport.com", password: "", role: "agent" },
+        { id: "TS-CUSTOMER", name: "Rahul Kumar", email: "rahul@gmail.com", password: "", role: "customer" },
+        { id: "TS-CU-ANANYA", name: "Ananya Singh", email: "ananya@gmail.com", password: "", role: "customer" },
+        { id: "TS-CU-PRIYA", name: "Priya Das", email: "priya@gmail.com", password: "", role: "customer" },
+        { id: "TS-CU-ARJUN", name: "Arjun Mehta", email: "arjun@gmail.com", password: "", role: "customer" }
     ];
     localStorage.setItem(authUsersStorageKey, JSON.stringify(starterUsers));
     return starterUsers;
@@ -83,6 +83,12 @@ function syncAuthUsersWithRecords() {
     authUsers.forEach(function(user) {
         if (!user || !user.email || !user.role) return;
         user.email = String(user.email).trim().toLowerCase();
+        if ((user.role === "admin" && user.password === "admin123") ||
+            (user.role === "agent" && user.password === "agent123") ||
+            (user.role === "customer" && user.password === "customer123")) {
+            user.password = "";
+            changed = true;
+        }
         if (!user.id || usedIds.has(user.id)) {
             user.id = createAuthUserId(user.role, user.name || user.email.split("@")[0], authUsers);
             changed = true;
@@ -95,8 +101,8 @@ function syncAuthUsersWithRecords() {
         changed = true;
     }
 
-    const records = agents.map(function(agent) { return { record: agent, role: "agent", password: "agent123" }; })
-        .concat(customers.map(function(customer) { return { record: customer, role: "customer", password: "customer123" }; }));
+    const records = agents.map(function(agent) { return { record: agent, role: "agent" }; })
+        .concat(customers.map(function(customer) { return { record: customer, role: "customer" }; }));
     records.forEach(function(entry) {
         const email = String(entry.record.email || "").trim().toLowerCase();
         if (!email) return;
@@ -112,7 +118,7 @@ function syncAuthUsersWithRecords() {
             id: createAuthUserId(entry.role, entry.record.name || email.split("@")[0], authUsers),
             name: entry.record.name,
             email: email,
-            password: entry.password,
+            password: "",
             role: entry.role
         });
         changed = true;
@@ -146,6 +152,7 @@ function authDestination(role) {
 function setupAuthPage() {
     const loginForm = document.getElementById("loginForm");
     const registerForm = document.getElementById("registerForm");
+    const passwordResetForm = document.getElementById("passwordResetForm");
     const feedback = document.getElementById("authFeedback");
     const title = document.getElementById("authTitle");
     const subtitle = document.getElementById("authSubtitle");
@@ -156,13 +163,14 @@ function setupAuthPage() {
             const isLogin = tab.dataset.authMode === "login";
             loginForm.hidden = !isLogin;
             registerForm.hidden = isLogin;
+            passwordResetForm.hidden = true;
             document.querySelectorAll("[data-auth-mode]").forEach(function(item) {
                 const selected = item === tab;
                 item.classList.toggle("is-active", selected);
                 item.setAttribute("aria-selected", String(selected));
             });
             title.textContent = isLogin ? "Welcome back" : "Create your account";
-            subtitle.textContent = isLogin ? "Sign in with your user ID or email." : "Choose a role and set up your local demo account.";
+            subtitle.textContent = isLogin ? "Sign in with your user ID or email." : "Create a customer account and choose your password.";
             feedback.textContent = "";
             feedback.classList.remove("is-success");
         });
@@ -185,6 +193,45 @@ function setupAuthPage() {
         window.location.href = authDestination(user.role);
     });
 
+    document.getElementById("showPasswordReset").addEventListener("click", function() {
+        loginForm.hidden = true;
+        registerForm.hidden = true;
+        passwordResetForm.hidden = false;
+        title.textContent = "Set a new password";
+        subtitle.textContent = "Enter the user ID or email on your account.";
+        feedback.textContent = "";
+        feedback.classList.remove("is-success");
+    });
+
+    passwordResetForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const identity = document.getElementById("resetIdentity").value.trim().toLowerCase();
+        const password = document.getElementById("resetPassword").value;
+        const confirmation = document.getElementById("resetPasswordConfirm").value;
+        if (password.length < 6 || password !== confirmation) {
+            feedback.textContent = password.length < 6 ? "Password must be at least 6 characters." : "Passwords do not match.";
+            feedback.classList.remove("is-success");
+            return;
+        }
+        authUsers = syncAuthUsersWithRecords();
+        const user = authUsers.find(function(account) {
+            return account.id.toLowerCase() === identity || account.email.toLowerCase() === identity;
+        });
+        if (!user) {
+            feedback.textContent = "No account found with that user ID or email.";
+            feedback.classList.remove("is-success");
+            return;
+        }
+        user.password = password;
+        localStorage.setItem(authUsersStorageKey, JSON.stringify(authUsers));
+        loginIdentity.value = user.id;
+        document.getElementById("loginPassword").value = "";
+        passwordResetForm.reset();
+        document.querySelector('[data-auth-mode="login"]').click();
+        feedback.textContent = "Password updated. Sign in with user ID " + user.id + ".";
+        feedback.classList.add("is-success");
+    });
+
     registerForm.addEventListener("submit", function(event) {
         event.preventDefault();
         customers = parseJson(localStorage.getItem(customerStorageKey), customers);
@@ -192,7 +239,7 @@ function setupAuthPage() {
         authUsers = syncAuthUsersWithRecords();
         const name = document.getElementById("registerName").value.trim();
         const email = document.getElementById("registerEmail").value.trim().toLowerCase();
-        const role = document.getElementById("registerRole").value;
+        const role = "customer";
         const password = document.getElementById("registerPassword").value;
         if (authUsers.some(function(account) { return account.email.toLowerCase() === email; })) {
             feedback.textContent = "An account with this email already exists. Sign in instead.";
@@ -238,6 +285,8 @@ function applyRoleAccess(session) {
     if (pageName === "index.html") {
         setText("dashboardGreeting", "Good Morning, " + session.name.split(" ")[0] + "!");
     }
+    const backupTools = document.getElementById("ticketBackupTools");
+    if (backupTools) backupTools.hidden = session.role !== "admin";
     document.querySelectorAll(".sidebar a[href]").forEach(function(link) {
         const target = link.getAttribute("href").split("?")[0].toLowerCase();
         if (session.role === "customer" && pageName !== "customer-dashboard.html") {
@@ -451,12 +500,8 @@ function cloneRecord(record) {
 
 function loadCollection(key, defaults, identityKey) {
     const stored = localStorage.getItem(key);
-    const records = stored ? parseJson(stored, []) : defaults.map(cloneRecord);
-    defaults.forEach(function(defaultRecord) {
-        if (!records.some(function(record) { return record[identityKey] === defaultRecord[identityKey]; })) {
-            records.push(cloneRecord(defaultRecord));
-        }
-    });
+    const parsedRecords = stored === null ? null : parseJson(stored, null);
+    const records = Array.isArray(parsedRecords) ? parsedRecords : defaults.map(cloneRecord);
     localStorage.setItem(key, JSON.stringify(records));
     return records;
 }
@@ -480,6 +525,63 @@ function saveTickets() { localStorage.setItem(ticketStorageKey, JSON.stringify(t
 function saveCustomers() { localStorage.setItem(customerStorageKey, JSON.stringify(customers)); }
 function saveAgents() { localStorage.setItem(agentStorageKey, JSON.stringify(agents)); }
 
+function exportSupportData() {
+    if (!authSession || authSession.role !== "admin") return;
+    const backup = {
+        format: "techsupport-backup",
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        tickets: tickets,
+        customers: customers
+    };
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const download = document.createElement("a");
+    download.href = url;
+    download.download = "techsupport-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(download);
+    download.click();
+    download.remove();
+    URL.revokeObjectURL(url);
+}
+
+function importSupportData(event) {
+    const fileInput = event.target;
+    const file = fileInput.files && fileInput.files[0];
+    if (!file || !authSession || authSession.role !== "admin") return;
+    const reader = new FileReader();
+    reader.onload = function() {
+        const backup = parseJson(String(reader.result || ""), null);
+        const validBackup = backup && backup.format === "techsupport-backup" && backup.version === 1 &&
+            Array.isArray(backup.tickets) && Array.isArray(backup.customers) &&
+            backup.tickets.every(function(ticket) { return ticket && typeof ticket.id === "string" && typeof ticket.email === "string"; }) &&
+            backup.customers.every(function(customer) { return customer && typeof customer.email === "string"; });
+        if (!validBackup) {
+            alert("This file is not a valid TechSupport backup.");
+            fileInput.value = "";
+            return;
+        }
+        if (!confirm("Replace this browser's tickets and customers with the selected backup?")) {
+            fileInput.value = "";
+            return;
+        }
+        tickets = backup.tickets;
+        customers = deduplicateCustomers(backup.customers);
+        saveTickets();
+        saveCustomers();
+        syncCustomersFromTickets();
+        authUsers = syncAuthUsersWithRecords();
+        refreshAllViews();
+        alert("Backup restored. " + tickets.length + " tickets are now available.");
+        fileInput.value = "";
+    };
+    reader.onerror = function() {
+        alert("The selected backup could not be read.");
+        fileInput.value = "";
+    };
+    reader.readAsText(file);
+}
+
 function getAgentTicketCount(agent, ticketList) {
     const resolvedTickets = ticketList.filter(function(ticket) {
         const owner = ticket.resolvedBy || {};
@@ -499,45 +601,6 @@ function nextTicketId() {
         if (!isNaN(number) && number >= nextNumber) nextNumber = number + 1;
     });
     return "#TS-" + nextNumber;
-}
-
-function createTicket() {
-    const modal = document.createElement("div");
-    modal.className = "modal-overlay";
-    modal.innerHTML = `<div class="modal-box"><div class="modal-header"><h2>Create New Ticket</h2><button type="button" onclick="closeModal()">&times;</button></div>
-        <form onsubmit="saveTicket(event)"><label>Customer Name</label><input id="ticketCustomerName" required><label>Email</label><input type="email" id="ticketCustomerEmail" required>
-        <label>Category</label><select id="ticketCategory"><option>Network</option><option>Software</option><option>Hardware</option><option>Account</option><option>Other</option></select>
-        <label>Priority</label><select id="ticketPriority"><option>Low</option><option>Medium</option><option>High</option></select><label>Subject</label><input id="ticketSubject" required>
-        <label>Description</label><textarea id="ticketDescription" rows="4" required></textarea><div class="modal-buttons"><button type="button" onclick="closeModal()">Cancel</button><button type="submit">Create Ticket</button></div></form></div>`;
-    document.body.appendChild(modal);
-}
-
-function saveTicket(event) {
-    event.preventDefault();
-    tickets = parseJson(localStorage.getItem(ticketStorageKey), tickets);
-    customers = parseJson(localStorage.getItem(customerStorageKey), customers);
-    authUsers = syncAuthUsersWithRecords();
-    const customerEmail = document.getElementById("ticketCustomerEmail").value.trim().toLowerCase();
-    const hadCustomerAccount = authUsers.some(function(user) { return user.email === customerEmail && user.role === "customer"; });
-    const ticket = {
-        id: nextTicketId(),
-        customer: document.getElementById("ticketCustomerName").value.trim(),
-        email: document.getElementById("ticketCustomerEmail").value.trim(),
-        category: document.getElementById("ticketCategory").value,
-        priority: document.getElementById("ticketPriority").value,
-        subject: document.getElementById("ticketSubject").value.trim(),
-        description: document.getElementById("ticketDescription").value.trim(),
-        status: "New"
-    };
-    tickets.push(ticket);
-    saveTickets();
-    addCustomerFromTicket(ticket);
-    authUsers = syncAuthUsersWithRecords();
-    const customerAccount = authUsers.find(function(user) { return user.email === customerEmail && user.role === "customer"; });
-    closeModal();
-    refreshAllViews();
-    const loginDetails = !hadCustomerAccount && customerAccount ? "\nCustomer login ID: " + customerAccount.id + "\nTemporary password: customer123" : "";
-    alert("Ticket created successfully: " + ticket.id + loginDetails);
 }
 
 function displayTickets() {
@@ -567,7 +630,9 @@ function displayRecentTickets() {
 }
 
 function actionButtons(type, index) {
-    return `<div class="ticket-actions"><button class="view-btn" onclick="viewRecord('${type}', ${index})" title="View"><i class="fa-solid fa-eye"></i></button><button class="status-btn" onclick="editRecord('${type}', ${index})" title="Edit"><i class="fa-solid fa-pen"></i></button><button class="delete-btn" onclick="deleteRecord('${type}', ${index})" title="Delete"><i class="fa-solid fa-trash"></i></button></div>`;
+    const supportRole = authSession && (authSession.role === "admin" || authSession.role === "agent");
+    const deleteAction = type === "ticket" && supportRole ? "" : `<button class="delete-btn" onclick="deleteRecord('${type}', ${index})" title="Delete"><i class="fa-solid fa-trash"></i></button>`;
+    return `<div class="ticket-actions"><button class="view-btn" onclick="viewRecord('${type}', ${index})" title="View"><i class="fa-solid fa-eye"></i></button><button class="status-btn" onclick="editRecord('${type}', ${index})" title="Update status"><i class="fa-solid fa-pen"></i></button>${deleteAction}</div>`;
 }
 
 function getRecords(type) {
@@ -630,6 +695,7 @@ function saveEdit(event, type, index) {
 }
 
 function deleteRecord(type, index) {
+    if (type === "ticket" && authSession && (authSession.role === "admin" || authSession.role === "agent")) return;
     const records = getRecords(type);
     if (!records[index] || !confirm("Delete this " + type + "?")) return;
     records.splice(index, 1);
@@ -784,7 +850,7 @@ function saveCustomer(event) {
     const customerAccount = authUsers.find(function(user) { return user.email === email.toLowerCase() && user.role === "customer"; });
     closeModal();
     refreshAllViews();
-    if (customerAccount) alert("Customer added. Login ID: " + customerAccount.id + "\nTemporary password: customer123");
+    if (customerAccount) alert("Customer added. User ID: " + customerAccount.id + ". They can set their password with Forgot password.");
 }
 
 function displayCustomers() {
@@ -818,9 +884,13 @@ function saveAgent(event) {
     saveAgents();
     authUsers = syncAuthUsersWithRecords();
     const agentAccount = authUsers.find(function(user) { return user.email === email.toLowerCase() && user.role === "agent"; });
+    if (agentAccount) {
+        agentAccount.password = "";
+        localStorage.setItem(authUsersStorageKey, JSON.stringify(authUsers));
+    }
     closeModal();
     refreshAllViews();
-    if (agentAccount) alert("Agent added. Login ID: " + agentAccount.id + "\nTemporary password: agent123");
+    if (agentAccount) alert("Agent added. User ID: " + agentAccount.id + ". They can set their password with Forgot password.");
 }
 
 function displayAgents() {
@@ -1045,6 +1115,8 @@ document.addEventListener("DOMContentLoaded", function() {
     refreshAllViews();
     const customerFeedbackForm = document.getElementById("customerFeedbackForm");
     if (customerFeedbackForm) customerFeedbackForm.addEventListener("submit", saveCustomerFeedback);
+    const ticketBackupFile = document.getElementById("ticketBackupFile");
+    if (ticketBackupFile) ticketBackupFile.addEventListener("change", importSupportData);
     const customerTicketForm = document.getElementById("customerTicketForm");
     if (customerTicketForm) customerTicketForm.addEventListener("submit", saveCustomerTicket);
     document.querySelectorAll(".search-box input, .feedback-search input, .reports-search input").forEach(function(searchInput) {

@@ -42,6 +42,7 @@
                     <label for="loginPassword">Password</label>
                     <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
                     <button class="auth-submit" type="submit">Sign in <i class="fa-solid fa-arrow-right"></i></button>
+                    <button class="auth-link-button" id="showPasswordReset" type="button">Forgot password?</button>
                 </form>
 
                 <form id="registerForm" class="auth-form" hidden>
@@ -49,25 +50,29 @@
                     <input id="registerName" name="name" autocomplete="name" placeholder="Your name" required>
                     <label for="registerEmail">Email</label>
                     <input id="registerEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
-                    <label for="registerRole">Account role</label>
-                    <select id="registerRole" name="role" required>
-                        <option value="customer">Customer</option>
-                        <option value="agent">Agent</option>
-                        <option value="admin">Admin</option>
-                    </select>
                     <label for="registerPassword">Password <span class="auth-hint">At least 6 characters</span></label>
                     <input id="registerPassword" name="password" type="password" autocomplete="new-password" minlength="6" placeholder="Create a password" required>
                     <button class="auth-submit" type="submit">Create account <i class="fa-solid fa-arrow-right"></i></button>
                 </form>
 
+                <form id="passwordResetForm" class="auth-form" hidden>
+                    <label for="resetIdentity">User ID or email</label>
+                    <input id="resetIdentity" name="identity" autocomplete="username" required>
+                    <label for="resetPassword">New password <span class="auth-hint">At least 6 characters</span></label>
+                    <input id="resetPassword" name="password" type="password" autocomplete="new-password" minlength="6" required>
+                    <label for="resetPasswordConfirm">Confirm new password</label>
+                    <input id="resetPasswordConfirm" name="passwordConfirm" type="password" autocomplete="new-password" minlength="6" required>
+                    <button class="auth-submit" type="submit">Set new password <i class="fa-solid fa-arrow-right"></i></button>
+                    <p class="auth-reset-note">Local demo reset only. No email verification is available.</p>
+                </form>
+
                 <p id="authFeedback" class="auth-feedback" role="status" aria-live="polite"></p>
 
                 <details class="demo-access">
-                    <summary>Demo accounts</summary>
+                    <summary>Account help</summary>
                     <div class="demo-account-list">
-                        <p><strong>Admin</strong><span>ID: TS-ADMIN · Password: admin123</span></p>
-                        <p><strong>Agent</strong><span>ID: TS-AGENT · Password: agent123</span></p>
-                        <p><strong>Customer</strong><span>ID: TS-CUSTOMER · Password: customer123</span></p>
+                        <p><strong>Team member</strong><span>Use the ID or email provided by your admin. Set a password with Forgot password.</span></p>
+                        <p><strong>Customer</strong><span>Create an account with Register, or sign in using your registered email.</span></p>
                     </div>
                 </details>
                 <p class="auth-disclaimer">Demo authentication only. Accounts and sessions are stored in this browser.</p>

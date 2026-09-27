@@ -996,6 +996,36 @@ td:first-child {
     background: #c92f3b;
 }
 
+.ticket-backup-tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ticket-backup-tools[hidden] {
+    display: none;
+}
+
+.ticket-backup-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 38px;
+    padding: 0 12px;
+    border: 1px solid #dce3dd;
+    border-radius: 6px;
+    background: #fff;
+    color: #39483f;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ticket-backup-btn:hover {
+    background: #f4f7f4;
+}
+
 
 /* Ticket Table */
 
@@ -1524,6 +1554,30 @@ td:first-child {
 
 .auth-submit:hover {
     background: #b64f33;
+}
+
+.auth-link-button {
+    justify-self: start;
+    padding: 3px 0;
+    border: 0;
+    background: transparent;
+    color: #39634c;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.auth-link-button:hover {
+    color: #234c36;
+    text-decoration: underline;
+}
+
+.auth-reset-note {
+    margin: 4px 0 0;
+    color: #829087;
+    font-size: 11px;
+    line-height: 1.5;
 }
 
 .auth-feedback {
